@@ -1,0 +1,20 @@
+Sub InsertRowAfterDuplicateGroup()
+    Dim LastRow As Long
+    Dim i As Long
+    Dim ws As Worksheet
+
+    ' Change "Sheet1" to your sheet name
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    ' Find the last row with data in column C
+    LastRow = ws.Cells(ws.Rows.Count, "C").End(xlUp).Row
+
+    ' Loop through each cell in column C from bottom to top
+    For i = LastRow To 2 Step -1
+        ' Check if the value in the current cell is different from the value in the cell above it
+        If ws.Cells(i, "c").Value <> ws.Cells(i - 1, "C").Value Then
+            ' Insert a row below the current row
+            ws.Rows(i).EntireRow.Insert
+        End If
+    Next i
+End Sub
